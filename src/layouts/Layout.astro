@@ -12,7 +12,21 @@ import "../styles/global.css";
     <title>Astro Basics</title>
   </head>
   <body>
-    <slot />
+    <div
+      class="w-full h-auto flex justify-start items-center flex-col mt-4 pt-4 gap-10 sigmar-regular"
+    >
+      <div>
+        <p class="text-white text-5xl drop-shadow-md">NoContact</p>
+        <p class="text-green-900 text-7xl drop-shadow-md">WA.ME</p>
+      </div>
+      <p>
+        Este sitio está dedicado a poder abrir chats de Whatsapp sin necesidad
+        de agregar los contactos.
+      </p>
+      <div class="w-full h-full grid grid-cols-2 items-start justify-items-center">
+        <slot />
+      </div>
+    </div>
   </body>
 </html>
 

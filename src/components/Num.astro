@@ -1,0 +1,46 @@
+---
+
+---
+
+<div class="bg-black h-full p-6 rounded-xl w-[70%] outline-black outline-2 outline-offset-2">
+  <form action="" class="flex flex-col justify-center items-center gap-6">
+    <div class="w-full flex-col justify-start items-center gap-2">
+        <p class="text-white shadow-md mb-2">Buenas tardes, <br> Le escribe _________ de Briznner</p>
+      <textarea
+        class="w-full resize-y h-50 rounded-xl bg-green-50 px-4 py-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-md transition-all"
+      ></textarea>
+    </div>
+
+    <button
+      type="submit"
+      class="w-[200px] h-10 rounded-xl hover:cursor-pointer bg-green-50 text-black text-xl hover:bg-green-300 transition-all active:bg-green-400"
+    >
+      Guardar texto
+    </button>
+  </form>
+
+  <script>
+    const formulario = document.getElementsByTagName("form")[1];
+    formulario.onsubmit = (e) => {
+      e.preventDefault();
+
+      const target = e.target as HTMLFormElement;
+      const textArea = target?.[0] as HTMLInputElement | undefined;
+      let numero1;
+
+      let firstapprove = false;
+
+      if (textArea && textArea.value.trim() !== "") {
+        console.log(textArea.value);
+        const numero = encodeURIComponent(textArea.value.trim());
+        numero1 = numero;
+        firstapprove = true;
+      }
+
+      //   if (firstapprove && secondapprove) {
+      //     const url = `https://wa.me/${numero1}${numero2}`;
+      //     window.open(url, "_blank");
+      //   }
+    };
+  </script>
+</div>
