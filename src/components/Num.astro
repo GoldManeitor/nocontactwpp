@@ -2,45 +2,121 @@
 
 ---
 
-<div class="bg-black h-full p-6 rounded-xl w-[70%] outline-black outline-2 outline-offset-2">
-  <form action="" class="flex flex-col justify-center items-center gap-6">
+<div
+  class="bg-black h-full p-6 rounded-xl w-[70%] outline-black outline-2 outline-offset-2"
+>
+  <div class="flex flex-col justify-center items-center gap-6">
     <div class="w-full flex-col justify-start items-center gap-2">
-        <p class="text-white shadow-md mb-2">Buenas tardes, <br> Le escribe _________ de Briznner</p>
+      <div class="text-white text-xs flex w-full gap-2 mb-2">
+        <div
+          class="tecnico border border-white rounded-4xl w-fit px-2 py-1 cursor-pointer"
+        >
+          Belén
+        </div>
+        <div
+          class="tecnico border border-white rounded-4xl w-fit px-2 py-1 cursor-pointer"
+        >
+          Lucas
+        </div>
+        <div
+          class="tecnico border border-white rounded-4xl w-fit px-2 py-1 cursor-pointer"
+        >
+          Álvaro
+        </div>
+        <div
+          class="tecnico border border-white rounded-4xl w-fit px-2 py-1 cursor-pointer"
+        >
+          Agustín
+        </div>
+        <div
+          class="tecnico border border-white rounded-4xl w-fit px-2 py-1 cursor-pointer"
+        >
+          Nestor
+        </div>
+      </div>
+      <div class="text-white shadow-md mb-2 w-fit flex">
+        <p>Buenas tardes,&nbsp;</p>
+        le escribe &nbsp;<p class="tec text-white w-fit">_________</p>&nbsp; de
+        Briznner,
+      </div>
       <textarea
         class="w-full resize-y h-50 rounded-xl bg-green-50 px-4 py-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-md transition-all"
       ></textarea>
     </div>
-
-    <button
-      type="submit"
-      class="w-[200px] h-10 rounded-xl hover:cursor-pointer bg-green-50 text-black text-xl hover:bg-green-300 transition-all active:bg-green-400"
-    >
-      Guardar texto
-    </button>
-  </form>
-
+  </div>
   <script>
-    const formulario = document.getElementsByTagName("form")[1];
+    //GET DEL DOM
+    const formulario = document.getElementsByTagName("form")[0];
+    const textoadicional = document.getElementsByTagName("textarea")[0];
+    const nombreTecnico = document.getElementsByClassName("tecnico");
+    const textoadver = document.getElementById("adver");
+
+    //TECNICOS
+    let tecnicoClicked = "_________";
+    Array.from(nombreTecnico).forEach((element) => {
+      const el = element as HTMLElement;
+      el.onclick = () => {
+        tecnicoClicked = el.innerText;
+        const nombreTecnico = document.getElementsByClassName("tec")[0];
+        const nombreEnTexto = nombreTecnico as HTMLElement;
+        nombreEnTexto.innerText = tecnicoClicked;
+        nombreEnTexto.classList.add("!text-red-300");
+      };
+    });
+
+    // TEXT AREA
+    let textoFueraFunc = "";
+    textoadicional.onchange = (e) => {
+      const target = e.target as HTMLTextAreaElement;
+
+      console.log(target?.value);
+      textoFueraFunc = target?.value || "undefined";
+    };
+
+    //NUMERO DE TELEFONO Y CONDICIONADOS
     formulario.onsubmit = (e) => {
       e.preventDefault();
 
       const target = e.target as HTMLFormElement;
-      const textArea = target?.[0] as HTMLInputElement | undefined;
+      const input1 = target?.[0] as HTMLInputElement | undefined;
+      const input2 = target?.[1] as HTMLInputElement | undefined;
+
       let numero1;
+      let numero2;
+      let texto;
 
       let firstapprove = false;
+      let secondapprove = false;
+      let thirdapprove = false;
 
-      if (textArea && textArea.value.trim() !== "") {
-        console.log(textArea.value);
-        const numero = encodeURIComponent(textArea.value.trim());
+      if (input1 && input1.value.trim() !== "") {
+        console.log(input1.value);
+        const numero = encodeURIComponent(input1.value.trim());
         numero1 = numero;
         firstapprove = true;
       }
+      if (input2 && input2.value.trim() !== "") {
+        console.log(input2.value);
+        const numero = encodeURIComponent(input2.value.trim());
+        numero2 = numero;
+        if (!textoadver?.classList.contains("hidden"))
+          textoadver?.classList.add("hidden");
+        secondapprove = true;
+      } else {
+        textoadver?.classList.remove("hidden");
+        console.log("removed hidden");
+      }
+      if (textoFueraFunc && textoFueraFunc.trim() !== "") {
+        console.log(textoFueraFunc);
+        const textoAd1 = encodeURIComponent(textoFueraFunc.trim());
+        texto = textoAd1;
+        thirdapprove = true;
+      }
 
-      //   if (firstapprove && secondapprove) {
-      //     const url = `https://wa.me/${numero1}${numero2}`;
-      //     window.open(url, "_blank");
-      //   }
+      if (firstapprove && secondapprove) {
+        const url = `https://wa.me/${numero1}${numero2}${thirdapprove ? `?text=Buenas tardes,%0Ale escribe ${tecnicoClicked} de Briznner, ${texto}` : ""}`;
+        window.open(url, "_blank");
+      }
     };
   </script>
 </div>

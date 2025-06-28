@@ -4,7 +4,7 @@
 
 <div>
   <h1
-    class="text-5xl font-bold text-white drop-shadow-md mt-[2%] sigmar-regular"
+    class="text-2xl font-bold text-white drop-shadow-md mt-[2%] sigmar-regular"
   >
     Escribe un número de teléfono
   </h1>
@@ -12,13 +12,13 @@
     <div class="flex justify-center items-center gap-2">
       <input
         type="text"
-        class="w-[200px] h-10 border-2 border-green-800 rounded-xl bg-green-50 px-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-xl transition-all"
+        class="w-20 h-10 border-2 border-green-800 rounded-xl bg-green-50 px-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-xl transition-all"
         placeholder="+598"
         value="+598"
       />
       <input
         type="text"
-        class="w-[600px] h-10 border-2 border-green-800 rounded-xl bg-green-50 px-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-xl transition-all"
+        class="w-64 h-10 border-2 border-green-800 rounded-xl bg-green-50 px-2 drop-shadow-md focus:border-none focus:outline-offset-2 focus:!outline-none text-xl transition-all"
       />
     </div>
 
@@ -30,45 +30,4 @@
     </button>
     <p id="adver" class="hidden text-red-300">No escribiste ningún número</p>
   </form>
-
-  <script>
-    const formulario = document.getElementsByTagName("form")[0];
-    const textoadver = document.getElementById("adver");
-
-    formulario.onsubmit = (e) => {
-      e.preventDefault();
-
-      const target = e.target as HTMLFormElement;
-      const input1 = target?.[0] as HTMLInputElement | undefined;
-      const input2 = target?.[1] as HTMLInputElement | undefined;
-      let numero1;
-      let numero2;
-
-      let firstapprove = false;
-      let secondapprove = false;
-
-      if (input1 && input1.value.trim() !== "") {
-        console.log(input1.value);
-        const numero = encodeURIComponent(input1.value.trim());
-        numero1 = numero;
-        firstapprove = true;
-      }
-      if (input2 && input2.value.trim() !== "") {
-        console.log(input2.value);
-        const numero = encodeURIComponent(input2.value.trim());
-        numero2 = numero;
-        if (!textoadver?.classList.contains("hidden"))
-          textoadver?.classList.add("hidden");
-        secondapprove = true;
-      } else {
-        textoadver?.classList.remove("hidden");
-        console.log("removed hidden");
-      }
-
-      if (firstapprove && secondapprove) {
-        const url = `https://wa.me/${numero1}${numero2}`;
-        window.open(url, "_blank");
-      }
-    };
-  </script>
 </div>
